@@ -185,7 +185,7 @@ img { display: block; max-width: 100%; }
 .hero {
   position: relative;
   overflow: hidden;
-  padding: clamp(3.5rem, 9vh, 6.5rem) 0 clamp(3rem, 8vh, 5.5rem);
+  padding: clamp(3rem, 7vh, 5.5rem) 0 clamp(2.5rem, 6vh, 4.5rem);
 }
 /* slow-rotating aurora behind the hero (pre-blurred gradients — no filter, cheap) */
 .hero::before {
@@ -308,9 +308,10 @@ img { display: block; max-width: 100%; }
 }
 
 .hero h1 {
-  font-size: clamp(2.5rem, 6.5vw, 4.3rem);
+  font-size: clamp(2.4rem, 5.4vw, 4rem);
   font-weight: 800;
   letter-spacing: -0.02em;
+  line-height: 1.05;
 }
 .hero h1 .hl {
   background: linear-gradient(90deg, var(--blue), var(--violet), var(--coral), var(--blue));
@@ -321,7 +322,7 @@ img { display: block; max-width: 100%; }
   animation: hue-slide 7s linear infinite;
 }
 @keyframes hue-slide { to { background-position: -300% 0; } }
-.hero__sub { color: var(--muted); font-size: 1.13rem; margin-top: 1.2rem; max-width: 34em; }
+.hero__sub { color: var(--muted); font-size: 1.1rem; margin-top: 1.2rem; max-width: 34em; }
 .hero__cta { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: 2rem; }
 
 .hero__social { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 2.4rem; }
@@ -338,7 +339,7 @@ img { display: block; max-width: 100%; }
 .social-chip:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--ink); }
 .social-chip img { width: 18px; height: 18px; }
 
-.hero__photo { position: relative; justify-self: center; width: 100%; max-width: 460px; }
+.hero__photo { position: relative; justify-self: center; width: 100%; max-width: 400px; }
 .hero__photo img {
   width: 100%;
   aspect-ratio: 4 / 4.6;
@@ -919,3 +920,51 @@ img { display: block; max-width: 100%; }
 .story-teaser h2 { font-size: clamp(1.6rem, 4vw, 2.3rem); font-weight: 800; }
 .story-teaser p { color: #6b5d52; margin-top: 0.8rem; max-width: 36em; }
 .story-teaser .btn { margin-top: 1.4rem; }
+
+/* ============================================================
+   INTERACTION LAYER — 3D tilt, glare, magnetic, count-up, stagger
+   (progressively enhanced; all gated behind hover + motion prefs)
+   ============================================================ */
+
+/* count-up stat: hold layout steady while the number animates */
+.stat-chip strong[data-count] { font-variant-numeric: tabular-nums; }
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  /* cards that opt into 3D tilt */
+  .tilt {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+    will-change: transform;
+  }
+  /* JS drives this var on hover; cleared on leave so the lift eases back */
+  .tilt.is-tilting {
+    transition: transform 0.08s linear, box-shadow 0.3s ease;
+    box-shadow: var(--shadow-lg);
+  }
+  /* moving light sheen that tracks the cursor */
+  .tilt-glare {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 4;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    background: radial-gradient(
+      240px circle at var(--gx, 50%) var(--gy, 50%),
+      rgba(255, 255, 255, 0.6),
+      rgba(255, 255, 255, 0) 62%
+    );
+    mix-blend-mode: soft-light;
+  }
+  .tilt.is-tilting .tilt-glare { opacity: 1; }
+  /* nudge inner content forward for a touch of real depth */
+  .tilt > *:not(.tilt-glare) { transform: translateZ(0.01px); }
+
+  /* magnetic elements (buttons) */
+  .magnetic { will-change: transform; }
+}
+
+/* staggered reveal: JS sets --d when a batch enters together */
+.fade { transition-delay: var(--d, 0s); }
