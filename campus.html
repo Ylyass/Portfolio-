@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Swinburne Campus App — Case Study — Ylyas Nurmuhammedov</title>
+  <meta name="description" content="Swinburne Campus App case study: 360° campus navigation, an AI assistant with guardrails, and 30+ functional, security, and load tests." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400..800&family=Inter:wght@400..800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=4" />
+</head>
+<body class="case--violet">
+
+  <div class="progress" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="site-header__in">
+      <a class="logo" href="index.html"><span class="logo__mark">YN</span>Ylyas N.</a>
+      <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="work.html">Work</a>
+        <a href="about.html">About</a>
+        <a class="btn-nav" href="mailto:nurmuhammedovylyas@gmail.com">Say hello</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="case-hero">
+      <div class="wrap">
+        <a class="back" href="work.html">Back to all work</a>
+        <div class="case-hero__tags">
+          <span class="pill pill--violet">Case study 02</span>
+          <span class="pill">Final Year Project</span>
+        </div>
+        <h1>Swinburne Campus App</h1>
+        <p class="lede">
+          A mobile-first campus app built from what students actually asked for —
+          360° navigation at its core, with an AI assistant that knows its limits.
+        </p>
+        <div class="case-meta">
+          <div><span>Client</span><strong>Swinburne University of Technology Sarawak</strong></div>
+          <div><span>Year</span><strong>2025–2026</strong></div>
+          <div><span>Role</span><strong>Full-stack — navigation, AI assistant, settings, security testing</strong></div>
+          <div><span>Type</span><strong>Team project · deployed PWA</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 1rem;">
+      <div class="wrap">
+        <div class="case-body">
+
+          <h2 class="fade">The problem</h2>
+          <p class="fade">
+            Swinburne's Sarawak campus has expanded fast — new buildings, renovated
+            spaces, more faculties. Parents arrive for orientation days, school groups
+            visit, and a fresh intake of students lands every semester. The problem is
+            the same for all of them: <strong>people get lost.</strong>
+          </p>
+          <p class="fade">
+            Not vaguely lost — specifically lost. Standing in front of a building trying
+            to figure out which room is on which floor, which hall a lecture is in, where
+            the nearest admin office hides. The university's existing digital resources
+            weren't built for navigation.
+          </p>
+          <div class="callout callout--violet fade">
+            <strong>Evidence first, assumptions never:</strong>
+            <p>
+              Before building anything, we surveyed students: what do you struggle with
+              most on campus, and what would you want in an app that doesn't exist yet?
+              Navigation came back as the #1 problem — followed by campus events, funding
+              information, and Canvas/IT support. Every module in the final product traces
+              directly back to a survey response.
+            </p>
+          </div>
+
+          <h2 class="fade">What I built</h2>
+
+          <h3 class="fade">360° campus navigation — the core feature</h3>
+          <ul class="fade">
+            <li>Pick any starting point and any destination — a lecture hall, room number, office, or facility — and get a guided path through campus.</li>
+            <li>Built as the entry point of the app, not an afterthought buried in a tab bar.</li>
+            <li>Covers the survey's real use cases: new students finding rooms, parents and visitors on open days, school groups on campus tours.</li>
+          </ul>
+
+          <h3 class="fade">AI campus assistant</h3>
+          <ul class="fade">
+            <li>Handles the queries students actually send staff: eduroam/Wi-Fi setup, Canvas login issues, fee clarification, visa support contacts, navigation questions.</li>
+            <li>Topic-aware conversation state — follow-up questions don't restart from zero.</li>
+            <li>Structured responses per query type: reply text, source links, navigation actions deep-linking into the map, and follow-up chips.</li>
+            <li>Controlled fallback: when confidence is low, it hands off explicitly to the Support page instead of improvising.</li>
+            <li>Rate-limiting built into the architecture from day one.</li>
+          </ul>
+
+          <h3 class="fade">The supporting modules</h3>
+          <div class="mini-cards fade">
+            <div class="mini-card">
+              <span class="ic">📅</span>
+              <h4>Campus events</h4>
+              <p>Event browser with Google Maps directions, save/favourite, and Add to Calendar with fallback handling.</p>
+            </div>
+            <div class="mini-card">
+              <span class="ic">⚙️</span>
+              <h4>Settings &amp; profile</h4>
+              <p>Microsoft-synced institutional identity (read-only) clearly separated from editable student fields.</p>
+            </div>
+            <div class="mini-card">
+              <span class="ic">💰</span>
+              <h4>Funding &amp; scholarships</h4>
+              <p>Structured access to financial resources that previously meant digging through the university website.</p>
+            </div>
+          </div>
+
+          <h3 class="fade">Security &amp; testing</h3>
+          <p class="fade">
+            JWT-based authentication with access control enforced at the architectural
+            layer — and a testing plan that was part of delivery, not an afterthought:
+          </p>
+          <div class="stat-chips fade">
+            <div class="stat-chip"><strong>30+</strong><span>tests conducted</span></div>
+            <div class="stat-chip"><strong>⚙️</strong><span>functional &amp; integration</span></div>
+            <div class="stat-chip"><strong>🛡️</strong><span>simulated DDoS &amp; flooding</span></div>
+            <div class="stat-chip"><strong>🤖</strong><span>AI rate-limit validation</span></div>
+            <div class="stat-chip"><strong>🚀</strong><span>validated on Vercel</span></div>
+          </div>
+
+          <h2 class="fade">Why I built it this way</h2>
+
+          <div class="decision fade">
+            <h3>Navigation as the entry state, not one module of many</h3>
+            <p>
+              The survey data was clear, so the architecture followed it: the first thing
+              you see is the campus map and path selector. Everything else is reachable
+              from there — which shaped the routing structure and let the AI assistant
+              deep-link directly into map views.
+            </p>
+          </div>
+
+          <div class="decision fade">
+            <h3>An assistant that can't answer freely</h3>
+            <p>
+              A language model improvising answers about visa renewal deadlines or fee
+              exemptions is a liability. Interpretation, grounding, safety, and
+              rate-limiting live in separate logic files — not inside one prompt. The
+              assistant knows which topics it can address reliably; outside those, it
+              hands off to Support. That constraint is what makes it trustworthy.
+            </p>
+          </div>
+
+          <div class="decision fade">
+            <h3>Security testing planned before development finished</h3>
+            <p>
+              An AI assistant with no rate control is a budget problem the moment someone
+              abuses it, and a campus app is a public-facing target — including large
+              crowds during orientation. DDoS and flooding scenarios were tested because
+              shipping without them would have left known risks unverified.
+            </p>
+          </div>
+
+          <div class="decision fade">
+            <h3>The mid-sprint settings redesign</h3>
+            <p>
+              Early testing showed users trying to edit Microsoft-synced fields, seeing
+              no feedback, and assuming saves had failed. A form that silently ignores
+              writes is a trust problem. The fix: two explicitly labelled sections —
+              Account &amp; Sync (institutional, read-only) and Student Details
+              (user-editable) — so the interface promises exactly what the system does.
+            </p>
+          </div>
+
+          <div class="outcome fade">
+            <h2>Outcome</h2>
+            <p>
+              A deployed progressive web application for Swinburne Kuching — built from
+              direct student survey data, with 360° navigation as the core and AI-assisted
+              support, events, funding, and profile management around it. 30+ tests across
+              functional, security, and load scenarios before handoff.
+            </p>
+            <p>
+              The assistant architecture is modular: adding a new support topic doesn't
+              require rewriting core logic.
+            </p>
+          </div>
+
+          <h2 class="fade">Stack</h2>
+          <div class="stack-row fade">
+            <span class="skill-chip"><img src="https://cdn.simpleicons.org/typescript" alt="" width="18" height="18" />TypeScript</span>
+            <span class="skill-chip"><img src="https://cdn.simpleicons.org/nextdotjs/000000" alt="" width="18" height="18" />Next.js</span>
+            <span class="skill-chip"><img src="https://cdn.simpleicons.org/react" alt="" width="18" height="18" />React</span>
+            <span class="skill-chip"><img src="https://cdn.simpleicons.org/anthropic/000000" alt="" width="18" height="18" />Claude API</span>
+            <span class="skill-chip">🔑 JWT Auth</span>
+            <span class="skill-chip">🌐 REST API</span>
+            <span class="skill-chip"><img src="https://cdn.simpleicons.org/vercel/000000" alt="" width="18" height="18" />Vercel</span>
+          </div>
+
+          <div class="next-case">
+            <span>Next case study</span>
+            <a href="semangoh.html">Semangoh Park Guard System</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© 2026 Ylyas Nurmuhammedov</span>
+    <span>Kuching, Sarawak 🌿</span>
+  </footer>
+
+  <script src="js/site.js?v=3"></script>
+</body>
+</html>

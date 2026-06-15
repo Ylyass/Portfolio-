@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartTaxApp — Case Study — Ylyas Nurmuhammedov</title>
+  <meta name="description" content="SmartTaxApp case study: an SST tax compliance platform with multi-tenant Row-Level Security and a self-improving classification pipeline." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400..800&family=Inter:wght@400..800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=4" />
+</head>
+<body class="case--blue">
+
+  <div class="progress" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="site-header__in">
+      <a class="logo" href="index.html"><span class="logo__mark">YN</span>Ylyas N.</a>
+      <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="work.html">Work</a>
+        <a href="about.html">About</a>
+        <a class="btn-nav" href="mailto:nurmuhammedovylyas@gmail.com">Say hello</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="case-hero">
+      <div class="wrap">
+        <a class="back" href="work.html">Back to all work</a>
+        <div class="case-hero__tags">
+          <span class="pill pill--blue">Case study 01</span>
+          <span class="pill">Internship — Work Integrated Learning</span>
+        </div>
+        <h1>SmartTaxApp</h1>
+        <p class="lede">
+          An SST compliance platform for Sarawak's business community — it tells you
+          exactly what tax to charge and why, and it gets smarter every Monday without
+          a developer touching it.
+        </p>
+        <div class="case-meta">
+          <div><span>Client</span><strong>Syarikat Tajau Berseri, Kuching</strong></div>
+          <div><span>Year</span><strong>2026</strong></div>
+          <div><span>Role</span><strong>Full-Stack Developer (sole dev)</strong></div>
+          <div><span>Status</span><strong>Deployed to production</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 1rem;">
+      <div class="wrap">
+        <div class="case-body">
+
+          <h2 class="fade">First, what is SST?</h2>
+          <p class="fade">
+            SST (Sales and Services Tax) is Malaysia's consumption tax — comparable to
+            VAT in Europe or GST in Australia. Businesses above a revenue threshold must
+            register for it and charge it on qualifying transactions.
+          </p>
+          <p class="fade">
+            Here's where it gets complicated: the rate you apply depends on <strong>three
+            things at once</strong> — what you're selling, what kind of business you are
+            (your MSIC code), and whether your revenue crosses the registration threshold.
+            MSIC is the government's industrial classification: a cafe, a software company,
+            a law firm, and a clothing retailer all hold different codes, and the same item
+            can be taxed differently under each.
+          </p>
+          <div class="callout callout--blue fade">
+            <strong>The reality for business owners:</strong>
+            <p>
+              A newly incorporated company, or a cafe crossing RM500k revenue for the first
+              time, navigates this by cross-referencing government PDFs, calling an
+              accountant — or guessing. Most guess. Most get it wrong.
+            </p>
+          </div>
+
+          <h2 class="fade">The problem</h2>
+          <p class="fade">
+            Startups don't know what tax to charge on their invoices. Cafes don't know
+            whether their items qualify. Established SMEs reclassify products
+            inconsistently across invoices. And when someone typed an item nobody had
+            classified before, the old workflow had no process — the item simply went
+            unresolved.
+          </p>
+          <p class="fade">
+            Underneath the confusion sat a data problem: the product depends on a
+            reference database of items and MSIC codes that was never going to be
+            complete on day one. Every unrecognized item was a data gap — and unhandled
+            gaps accumulate until the system stops being useful.
+          </p>
+
+          <h2 class="fade">What I built</h2>
+
+          <h3 class="fade">Database &amp; access control</h3>
+          <ul class="fade">
+            <li>Designed the full PostgreSQL schema from scratch — <code>profiles</code>, <code>purchases</code>, <code>invoices</code>, <code>msic_codes</code>, <code>items</code>, <code>sst_rules</code> — structured for multi-tenant isolation.</li>
+            <li>Implemented Supabase Row-Level Security: owner-only access on user-scoped tables, read-only on shared reference tables. The constraint is enforced <em>inside PostgreSQL itself</em> — it holds no matter what the frontend or any API client sends.</li>
+          </ul>
+
+          <h3 class="fade">SST resolution engine</h3>
+          <ul class="fade">
+            <li>A database-driven query chain: item lookup, then MSIC match, then MSIC category fallback, then the SST outcome.</li>
+            <li>Zero hardcoded tax rates anywhere in application code. When a tax rule changes, it's a database update — no redeployment.</li>
+            <li>Validated against a 12-case acceptance checklist covering different combinations of item type, MSIC code, and expected outcome — with screenshot evidence per case.</li>
+          </ul>
+
+          <h3 class="fade">The self-improving classification pipeline</h3>
+          <p class="fade">
+            This is my favorite part. When a business owner keys in an invoice item that
+            doesn't exist in the database yet, the system doesn't error — it quietly
+            captures and queues it. Then, every Monday:
+          </p>
+          <div class="flow fade">
+            <div class="flow__step"><span class="flow__n">1</span>User keys in item<em>unrecognized</em></div>
+            <div class="flow__step"><span class="flow__n">2</span>Queued silently<em>no error shown</em></div>
+            <div class="flow__step flow__step--hi"><span class="flow__n">3</span>Monday export<em>scheduled function</em></div>
+            <div class="flow__step"><span class="flow__n">4</span>Admin fills MSIC<em>tax specialist, not a dev</em></div>
+            <div class="flow__step flow__step--hi"><span class="flow__n">5</span>Auto sync<em>Supabase fetches file</em></div>
+            <div class="flow__step"><span class="flow__n">6</span>Item resolves<em>for all users</em></div>
+          </div>
+          <p class="fade">
+            The admin is a tax specialist, not a developer. They work in a spreadsheet in
+            a shared folder — territory they already know. No database access, no developer
+            involvement, and the reference data improves automatically every week.
+          </p>
+
+          <h3 class="fade">Authentication</h3>
+          <p class="fade">
+            Email login, password reset, and session handling — with redirect URLs
+            configured correctly across development and production. A reset flow that
+            breaks in production pushes users toward duplicate accounts and weak
+            passwords, so getting this right wasn't optional.
+          </p>
+
+          <h2 class="fade">Why I built it this way</h2>
+
+          <div class="decision fade">
+            <h3>RLS at the database layer, not the application layer</h3>
+            <p>
+              Application-level checks depend on the frontend sending the correct user ID
+              and the API trusting it — an assumption that breaks with one bug, one
+              misconfigured client, or one direct database connection. Row-Level Security
+              enforces isolation inside PostgreSQL, at the row level, against the
+              authenticated role, before data ever leaves the database. Least privilege,
+              applied practically.
+            </p>
+          </div>
+
+          <div class="decision fade">
+            <h3>Database-driven rules, not hardcoded logic</h3>
+            <p>
+              Tax rules in Malaysia change — new categories, adjusted rates. Hardcoded
+              outcomes would make every change a code review, a deployment, and a risk.
+              As structured database rows, an update is a data change: auditable,
+              reversible, deployable without touching code. The MSIC fallback was written
+              as a sequential query chain so each step could be tested in isolation.
+            </p>
+          </div>
+
+          <div class="decision fade">
+            <h3>A pipeline designed around a non-technical admin</h3>
+            <p>
+              The person with the tax knowledge is not the person with database access —
+              and it shouldn't be the other way around. The shared-folder workflow keeps
+              the admin in a spreadsheet, keeps database writes server-side and automated,
+              and creates a weekly audit trail of what was classified and when.
+            </p>
+          </div>
+
+          <div class="outcome fade">
+            <h2>Outcome</h2>
+            <p>
+              A production-deployed SST compliance platform for Sarawak businesses.
+              Tax classification resolves from database rules with no hardcoded logic.
+              Multi-tenant isolation enforced at the row level. Fresh MSIC data ships
+              every Monday with zero developer intervention.
+            </p>
+            <p>
+              Supervisor feedback noted proactive problem-solving and consistent delivery
+              under a remote-first arrangement.
+            </p>
+          </div>
+
+          <h2 class="fade">Stack</h2>
+          <div class="stack-row fade">
+            <span class="skill-chip"><img src="https://cdn.simpleicons.org/typescript" alt="" width="18" height="18" />TypeScript</span>
+            <span class="skill-chip"><img src="https://cdn.simpleicons.org/nextdotjs/000000" alt="" width="18" height="18" />Next.js</span>
+            <span class="skill-chip"><img src="https://cdn.simpleicons.org/supabase" alt="" width="18" height="18" />Supabase</span>
+            <span class="skill-chip"><img src="https://cdn.simpleicons.org/postgresql" alt="" width="18" height="18" />PostgreSQL</span>
+            <span class="skill-chip"><img src="https://cdn.simpleicons.org/vercel/000000" alt="" width="18" height="18" />Vercel</span>
+            <span class="skill-chip"><img src="https://cdn.simpleicons.org/googledrive" alt="" width="18" height="18" />Google Drive integration</span>
+          </div>
+
+          <div class="next-case">
+            <span>Next case study</span>
+            <a href="campus.html">Swinburne Campus App</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© 2026 Ylyas Nurmuhammedov</span>
+    <span>Kuching, Sarawak 🌿</span>
+  </footer>
+
+  <script src="js/site.js?v=3"></script>
+</body>
+</html>

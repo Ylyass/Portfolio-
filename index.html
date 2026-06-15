@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ylyas Nurmuhammedov — Full-Stack Developer</title>
+  <meta name="description" content="Ylyas Nurmuhammedov — full-stack developer building secure, real-world systems. SmartTaxApp, Swinburne Campus App, Semangoh Park Guard." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400..800&family=Inter:wght@400..800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=4" />
+</head>
+<body>
+
+  <div class="progress" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="site-header__in">
+      <a class="logo" href="index.html"><span class="logo__mark">YN</span>Ylyas N.</a>
+      <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="work.html">Work</a>
+        <a href="about.html">About</a>
+        <a class="btn-nav" href="mailto:nurmuhammedovylyas@gmail.com">Say hello</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap hero__grid">
+        <div>
+          <span class="hero__hello fade in">Hi, I'm Ylyas 👋 — open to opportunities</span>
+          <h1 class="fade in">I build full-stack software to solve actual <span class="hl"> operational problems</span></h1>
+          <p class="hero__sub fade in">
+            I am a 23-year-old software engineer who approaches code from a business perspective. Instead of just writing code to match a tech stack checklist, I build systems from the database up to the interface to eliminate real-world bottlenecks—proven by shipping an enterprise tax engine, an AI-driven campus app, and an IoT field network.
+          </p>
+          <div class="hero__cta fade in">
+            <a class="btn btn--primary" href="work.html">See my work</a>
+            <a class="btn btn--ghost" href="assets/resume.pdf" target="_blank" rel="noopener">View resume</a>
+          </div>
+          <div class="hero__social fade in">
+            <a class="social-chip" href="https://github.com/Ylyass" target="_blank" rel="noopener">
+              <img src="https://cdn.simpleicons.org/github/23212e" alt="" width="18" height="18" />GitHub
+            </a>
+            <a class="social-chip" href="https://www.linkedin.com/in/ylyasnurmuhammedov/" target="_blank" rel="noopener">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#0A66C2" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn
+            </a>
+            <a class="social-chip" href="mailto:nurmuhammedovylyas@gmail.com">
+              ✉️ Email
+            </a>
+          </div>
+        </div>
+        <div class="hero__photo fade in">
+          <img src="assets/Photopick.jpg" alt="Ylyas Nurmuhammedov" />
+
+          <!-- AI sidekick robot -->
+          <div class="bot" id="bot" aria-hidden="true">
+            <div class="bot__bubble"><span id="botText"></span><span class="bot__caret"></span></div>
+            <svg viewBox="0 0 120 132" width="100%">
+              <!-- antenna -->
+              <line x1="60" y1="22" x2="60" y2="10" stroke="#23212e" stroke-width="4" stroke-linecap="round"/>
+              <circle class="bot__tip" cx="60" cy="8" r="5" fill="#ff6b6b"/>
+              <!-- ears -->
+              <rect x="14" y="40" width="10" height="18" rx="5" fill="#23212e"/>
+              <rect x="96" y="40" width="10" height="18" rx="5" fill="#23212e"/>
+              <!-- head -->
+              <rect x="22" y="22" width="76" height="54" rx="18" fill="#fff" stroke="#23212e" stroke-width="4"/>
+              <!-- face screen -->
+              <rect x="34" y="33" width="52" height="32" rx="12" fill="#23212e"/>
+              <!-- eyes (pupils tracked by JS) -->
+              <g class="bot__eyes">
+                <circle class="bot__eye" cx="50" cy="47" r="5.5" fill="#7df3ff"/>
+                <circle class="bot__eye" cx="70" cy="47" r="5.5" fill="#7df3ff"/>
+              </g>
+              <path d="M54 58 q6 4.5 12 0" stroke="#7df3ff" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <!-- left arm -->
+              <rect x="22" y="86" width="9" height="26" rx="4.5" fill="#23212e"/>
+              <!-- waving right arm -->
+              <g class="bot__arm">
+                <rect x="89" y="80" width="9" height="28" rx="4.5" fill="#23212e"/>
+              </g>
+              <!-- body -->
+              <rect x="33" y="80" width="54" height="40" rx="15" fill="#fff" stroke="#23212e" stroke-width="4"/>
+              <!-- chest light -->
+              <circle class="bot__core" cx="60" cy="100" r="8" fill="#8b5cf6"/>
+              <!-- feet -->
+              <rect x="40" y="120" width="14" height="8" rx="4" fill="#23212e"/>
+              <rect x="66" y="120" width="14" height="8" rx="4" fill="#23212e"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED WORK -->
+    <section class="section" id="work">
+      <div class="wrap">
+        <div class="section-head fade">
+          <span class="kicker">Featured work</span>
+          <h2>Three projects, three very different problems</h2>
+          <p>A tax engine for businesses, a campus app for students, and a guard system for orangutans. Each one shipped.</p>
+        </div>
+
+        <div class="cards cards--3">
+          <a class="pcard pcard--blue fade" href="smarttax.html">
+            <div class="pcard__art" aria-hidden="true">
+              <svg viewBox="0 0 200 120" fill="none">
+                <rect x="55" y="14" width="90" height="96" rx="10" fill="#fff" stroke="#4a7cff" stroke-width="2.5"/>
+                <path d="M70 38h60M70 54h60M70 70h36" stroke="#b9ccff" stroke-width="5" stroke-linecap="round"/>
+                <circle cx="128" cy="88" r="17" fill="#4a7cff"/>
+                <path d="M120 88l6 6 11-12" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              </svg>
+            </div>
+            <div class="pcard__body">
+              <div class="pcard__meta"><span class="pill pill--blue">Internship</span><span class="pill">2026</span></div>
+              <h3>SmartTaxApp</h3>
+              <p>An SST compliance platform that tells Malaysian businesses exactly what tax to charge — and teaches itself new items every week.</p>
+              <span class="pcard__go">Read the case study</span>
+            </div>
+          </a>
+
+          <a class="pcard pcard--violet fade" href="campus.html">
+            <div class="pcard__art" aria-hidden="true">
+              <svg viewBox="0 0 200 120" fill="none">
+                <path d="M30 96 C60 80 70 52 102 56 C134 60 142 34 170 26" stroke="#8b5cf6" stroke-width="3" stroke-dasharray="7 8" stroke-linecap="round"/>
+                <circle cx="30" cy="96" r="9" fill="#fff" stroke="#8b5cf6" stroke-width="3"/>
+                <path d="M170 8c-9 0-16 7-16 16 0 12 16 26 16 26s16-14 16-26c0-9-7-16-16-16z" fill="#8b5cf6"/>
+                <circle cx="170" cy="24" r="6" fill="#fff"/>
+              </svg>
+            </div>
+            <div class="pcard__body">
+              <div class="pcard__meta"><span class="pill pill--violet">Final Year Project</span><span class="pill">2025–26</span></div>
+              <h3>Swinburne Campus App</h3>
+              <p>A mobile-first app with 360° navigation and an AI assistant — built from a student survey, so nobody gets lost on campus again.</p>
+              <span class="pcard__go">Read the case study</span>
+            </div>
+          </a>
+
+          <a class="pcard pcard--green fade" href="semangoh.html">
+            <div class="pcard__art" aria-hidden="true">
+              <svg viewBox="0 0 200 120" fill="none">
+                <path d="M100 100c0-34 14-58 44-66-2 34-16 56-44 66z" fill="#1f9d61"/>
+                <path d="M100 100c0-28-12-48-36-55 2 28 14 46 36 55z" fill="#5fc78f"/>
+                <path d="M100 100v8" stroke="#1f9d61" stroke-width="3" stroke-linecap="round"/>
+                <path d="M132 28c6-6 16-6 22 0M138 36c3-3 8-3 11 0" stroke="#1f9d61" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="pcard__body">
+              <div class="pcard__meta"><span class="pill pill--green">Client project</span><span class="pill">2025–26</span></div>
+              <h3>Semangoh Park Guard</h3>
+              <p>IoT intrusion detection for a wildlife centre's protected zones — real-time ranger alerts plus AI plant identification in the field.</p>
+              <span class="pcard__go">Read the case study</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- STORY TEASER -->
+    <section class="section" style="padding-top: 0;">
+      <div class="wrap">
+        <div class="story-teaser fade">
+          <div class="story-teaser__flag">
+            <span>🧳</span>
+            <small>23 · TURKMENISTAN</small>
+          </div>
+          <div>
+            <h2>I packed my life into a suitcase at 19.</h2>
+            <p>
+              From a country most people have never heard of, to an independent life on
+              the island of Borneo — four years of mistakes, growth, boxing rounds, and
+              hill runs that taught me the limit is never physical. That mindset is in
+              every line of code I write.
+            </p>
+            <a class="btn btn--primary" href="about.html#story">Read my story</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISION TEASER -->
+    <section class="section" style="padding-top: 0;">
+      <div class="wrap">
+        <div class="vision-teaser fade">
+          <span class="kicker">What drives me</span>
+          <blockquote>
+            "As AI models become more powerful, the bottleneck is no longer raw capability —
+            it's engineering infrastructure. I want to build the secure, scalable systems
+            that carry intelligence into the real world."
+          </blockquote>
+          <a class="btn btn--light" href="about.html#vision">Read my full direction</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CREDENTIALS -->
+    <section class="section section--soft">
+      <div class="wrap">
+        <div class="section-head fade">
+          <span class="kicker">Credentials</span>
+          <h2>Network defense, certified</h2>
+          <p>Three Cisco CCNA certifications — the security mindset behind every project above.</p>
+        </div>
+        <div class="badges">
+          <div class="badge-card fade">
+            <img src="assets/ccna-introduction-to-networks.png" alt="CCNA: Introduction to Networks badge" />
+            <h3>CCNA: Introduction to Networks</h3>
+            <span>Cisco Networking Academy</span>
+          </div>
+          <div class="badge-card fade">
+            <img src="assets/ccna-switching-routing-and-wireless-essentials.png" alt="CCNA: Switching, Routing, and Wireless Essentials badge" />
+            <h3>CCNA: Switching, Routing &amp; Wireless Essentials</h3>
+            <span>Cisco Networking Academy</span>
+          </div>
+          <div class="badge-card fade">
+            <img src="assets/ccna-enterprise-networking-security-and-automation.png" alt="CCNA: Enterprise Networking, Security, and Automation badge" />
+            <h3>CCNA: Enterprise Networking, Security &amp; Automation</h3>
+            <span>Cisco Networking Academy</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section contact" id="contact">
+      <div class="wrap fade">
+        <h2>Let's build something together</h2>
+        <p>I'm actively looking for opportunities where security, full-stack engineering, and applied AI meet. If that sounds like your team, I'd love to talk.</p>
+        <a class="btn btn--primary" href="mailto:nurmuhammedovylyas@gmail.com">nurmuhammedovylyas@gmail.com</a>
+        <div class="contact__links">
+          <a href="https://github.com/Ylyass" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/ylyasnurmuhammedov/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="assets/resume.pdf" target="_blank" rel="noopener">Resume</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <span>© 2026 Ylyas Nurmuhammedov</span>
+    <span>Kuching, Sarawak 🌿</span>
+  </footer>
+
+  <script src="js/site.js?v=3"></script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Semangoh Park Guard System — Case Study — Ylyas Nurmuhammedov</title>
+  <meta name="description" content="Semangoh Park Guard case study: IoT intrusion detection in the Sarawak rainforest with real-time ranger alerts and AI plant identification." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400..800&family=Inter:wght@400..800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=4" />
+</head>
+<body class="case--green">
+
+  <div class="progress" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="site-header__in">
+      <a class="logo" href="index.html"><span class="logo__mark">YN</span>Ylyas N.</a>
+      <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="work.html">Work</a>
+        <a href="about.html">About</a>
+        <a class="btn-nav" href="mailto:nurmuhammedovylyas@gmail.com">Say hello</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="case-hero">
+      <div class="wrap">
+        <a class="back" href="work.html">Back to all work</a>
+        <div class="case-hero__tags">
+          <span class="pill pill--green">Case study 03</span>
+          <span class="pill">Client project</span>
+        </div>
+        <h1>Semangoh Park Guard System</h1>
+        <p class="lede">
+          IoT intrusion detection for a rainforest wildlife centre — designed on-site,
+          deployed in the field, and built so every alert is one a ranger can act on.
+        </p>
+        <div class="case-meta">
+          <div><span>Client</span><strong>Semangoh Wildlife Centre, Sarawak</strong></div>
+          <div><span>Year</span><strong>2025–2026</strong></div>
+          <div><span>Role</span><strong>IoT Engineer + ML Developer + App Developer</strong></div>
+          <div><span>Type</span><strong>Deployed field system</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 1rem;">
+      <div class="wrap">
+        <div class="case-body">
+
+          <h2 class="fade">The problem</h2>
+          <p class="fade">
+            Semangoh Wildlife Centre sits outside Kuching in the Sarawak rainforest —
+            home to a semi-wild orangutan population and rare, protected plants, some on
+            the verge of extinction and restricted to zones the public can't enter.
+          </p>
+          <p class="fade">
+            Enforcement was manual. Rangers patrol, but a large park with multiple
+            restricted zones and a small team means constant gaps in coverage. When an
+            intrusion happened — a poacher, a visitor ignoring signage, someone
+            interfering with protected flora — there was no early warning, no record,
+            and no data trail for follow-up.
+          </p>
+          <div class="callout callout--green fade">
+            <strong>We went there first. 🌳</strong>
+            <p>
+              Before designing anything, we visited the park and walked the zones —
+              the humidity, the dense canopy, the wide temperature swings. Any device
+              had to survive those conditions, and any alert had to give rangers
+              something they could act on, not just noise. Most IoT projects are
+              designed from a desk; this one was designed from the terrain.
+            </p>
+          </div>
+          <p class="fade">
+            There was a second problem, too: rangers and guides couldn't always confirm
+            which plant species they were looking at in the field — critical for
+            prioritizing which zones needed attention.
+          </p>
+
+          <h2 class="fade">What I built</h2>
+
+          <h3 class="fade">The intrusion detection device — M5Stack Fire (ESP32)</h3>
+          <div class="mini-cards fade">
+            <div class="mini-card">
+              <span class="ic">👀</span>
+              <h4>PIR sensor</h4>
+              <p>Detects physical motion within the monitored perimeter.</p>
+            </div>
+            <div class="mini-card">
+              <span class="ic">📐</span>
+              <h4>ANGLE unit</h4>
+              <p>Detects if the device itself is tilted, moved, or tampered with — a second intrusion signal if someone tries to disable the hardware.</p>
+            </div>
+            <div class="mini-card">
+              <span class="ic">🌡️</span>
+              <h4>ENV.II sensor</h4>
+              <p>Logs temperature, humidity, and atmospheric pressure continuously.</p>
+            </div>
+          </div>
+          <ul class="fade">
+            <li><strong>Alert deduplication:</strong> a PIR sensor outdoors fires repeatedly for as long as motion is in range. A state flag is set on the first alert and cleared only when the reading drops below threshold — so each physical intrusion maps to exactly one database record.</li>
+            <li><strong>Rich event payload:</strong> sensor type, environmental readings at the moment of detection, and a timestamp — sent as JSON over Wi-Fi to the backend.</li>
+            <li><strong>On-device display:</strong> the M5Stack screen shows alert type, sensor status, and live environmental readings for staff at the device.</li>
+          </ul>
+
+          <h3 class="fade">AI plant identification</h3>
+          <p class="fade">
+            I trained a classification model on labelled image data to identify rare and
+            endangered plant species. In the app, rangers and guides point their camera
+            at a plant and get an identification with species information — useful for
+            both conservation fieldwork and guided visitor education.
+          </p>
+
+          <h3 class="fade">The ranger dashboard (React)</h3>
+          <ul class="fade">
+            <li>Real-time alert feed: incident type (motion / device tampered), time, and the environmental conditions logged at that moment.</li>
+            <li>Incident log with a timeline view for reviewing historical events.</li>
+            <li>Live sensor status and the plant identification interface.</li>
+          </ul>
+
+          <h2 class="fade">Why I built it this way</h2>
+
+          <div class="decision fade">
+            <h3>Deduplication was a day-one requirement, not a patch</h3>
+            <p>
+              One person crossing a zone slowly keeps a PIR active for 30–60 seconds —
+              potentially dozens of database writes for a single event. A database full
+              of duplicates in week one would have destroyed trust in the system
+              immediately. The boolean flag is simple to implement; deciding to implement
+              it <em>before</em> deployment is what mattered.
+            </p>
+          </div>
+
+          <div class="decision fade">
+            <h3>Environmental data rides along with every alert</h3>
+            <p>
+              Temperature, humidity, and pressure aren't the detection signal — they're
+              context. A ranger reviewing a 2am alert the next morning sees what the
+              environment was like at that moment. Over time, the dataset surfaces
+              patterns: intrusions correlating with weather, plant stress alongside
+              temperature spikes. One extra sensor read per event buys a rich historical
+              record at zero infrastructure cost.
+            </p>
+          </div>
+
+          <div class="decision fade">
+            <h3>The site visit shaped the engineering</h3>
+            <p>
+              The restricted zones aren't uniform — some dense canopy, some open ground.
+              Walking them determined where PIR coverage actually works, where ANGLE
+              tamper detection adds value, and what the realistic Wi-Fi range back to the
+              access point is. A desk-designed version would have been optimized for the
+              wrong environment.
+            </p>
+          </div>
+
+          <div class="outcome fade">
+            <h2>Outcome</h2>
+            <p>
+              A deployed intrusion detection system covering restricted zones at Semangoh
+              Wildlife Centre, with real-time alerts piped to a ranger-facing dashboard.
+              Each intrusion generates one clean record with full environmental context.
+              Plant identification is available in-field.
+            </p>
+            <p>
+              The ENV.II dataset builds passively over time — a growing historical record
+              of conditions across every monitored zone.
+            </p>
+          </div>
+
+          <h2 class="fade">Stack</h2>
+          <div class="stack-row fade">
+            <span class="skill-chip"><img src="https://cdn.simpleicons.org/micropython/2B2728" alt="" width="18" height="18" />MicroPython</span>
+            <span class="skill-chip"><img src="https://cdn.simpleicons.org/arduino" alt="" width="18" height="18" />Arduino (ESP32)</span>
+            <span class="skill-chip">📟 M5Stack Fire</span>
+            <span class="skill-chip">📡 PIR / ANGLE / ENV.II</span>
+            <span class="skill-chip">🌐 Wi-Fi / HTTP</span>
+            <span class="skill-chip"><img src="https://cdn.simpleicons.org/firebase" alt="" width="18" height="18" />Firebase</span>
+            <span class="skill-chip"><img src="https://cdn.simpleicons.org/python" alt="" width="18" height="18" />Python (ML training)</span>
+            <span class="skill-chip"><img src="https://cdn.simpleicons.org/react" alt="" width="18" height="18" />React</span>
+          </div>
+
+          <div class="next-case">
+            <span>Back to the start</span>
+            <a href="smarttax.html">SmartTaxApp</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© 2026 Ylyas Nurmuhammedov</span>
+    <span>Kuching, Sarawak 🌿</span>
+  </footer>
+
+  <script src="js/site.js?v=3"></script>
+</body>
+</html>
