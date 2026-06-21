@@ -490,13 +490,14 @@ img { display: block; max-width: 100%; }
 /* ============================================================
    ABOUT page
    ============================================================ */
-.about-hero { display: grid; grid-template-columns: 300px 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
-@media (max-width: 820px) { .about-hero { grid-template-columns: 1fr; } .about-hero__photo { max-width: 260px; } }
+.about-hero { display: grid; grid-template-columns: 380px 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: stretch; }
+@media (max-width: 820px) { .about-hero { grid-template-columns: 1fr; align-items: start; } .about-hero__photo { max-width: 320px; } .about-hero__photo img { height: auto; aspect-ratio: 4/5.6; } }
 .about-hero__photo img {
+  width: 100%;
+  height: 88%;
   border-radius: 28px;
-  aspect-ratio: 4/4.8;
   object-fit: cover;
-  object-position: 50% 62%;
+  object-position: 50% 78%;
   box-shadow: var(--shadow-lg);
 }
 .about-hero h1 { font-size: clamp(2.1rem, 5vw, 3.1rem); font-weight: 800; }
@@ -858,6 +859,7 @@ img { display: block; max-width: 100%; }
 .story-ch--2 .story-ch__n { background: linear-gradient(135deg, var(--coral), var(--violet)); }
 .story-ch--3 .story-ch__n { background: linear-gradient(135deg, var(--violet), var(--blue)); }
 .story-ch--4 .story-ch__n { background: linear-gradient(135deg, var(--blue), var(--green)); }
+.story-ch--5 .story-ch__n { background: linear-gradient(135deg, var(--green), var(--peach)); }
 .story-ch h3 { font-size: 1.45rem; font-weight: 700; margin-bottom: 0.6rem; }
 .story-ch p { color: #3c3947; margin: 0.7em 0; }
 .story-ch p:first-of-type { margin-top: 0; }
